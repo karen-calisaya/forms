@@ -31,63 +31,101 @@ window.addEventListener('load', () => {
             break;
         default:
             $title_error.innerHTML = '';
+            $title.classList.add('is-valid');
     }})
 
     $rating.addEventListener('blur', () => {
         switch(true){
         case !$rating.value.trim():
             $rating_error.innerHTML = "Requerido"; 
-            $rating_error.classList.add('is-invalid');; 
+            $rating_error.classList.add('is-invalid');
+            break;
+        case $rating.value < 0 || $rating.value >= 10:
+            $rating_error.innerHTML = "El valor debe ser entre 0 y 10"
             break;
         default:
             $rating_error.innerHTML = '';
+            $rating.classList.add('is-valid');
     }})
     $awards.addEventListener('blur', () => {
         switch(true){
         case !$awards.value.trim():
             $awards_error.innerHTML = "Requerido"; 
-            $awards_error.classList.add('is-invalid');; 
+            $awards_error.classList.add('is-invalid');
+            break;
+        case $awards.value < 0 || $awards.value >= 10:
+            $awards_error.innerHTML = "El valor debe ser entre 0 y 10"
             break;
         default:
             $awards_error.innerHTML = '';
+            $awards.classList.add('is-valid');
     }})
     $release_date.addEventListener('blur', () => {
         switch(true){
         case !$release_date.value.trim():
             $release_date_error.innerHTML = "Requerido"; 
-            $release_date_error.classList.add('is-invalid');; 
+            $release_date_error.classList.add('is-invalid');
             break;
         default:
             $release_date_error.innerHTML = '';
+            $release_date.classList.add('is-valid');
     }})
     $length.addEventListener('blur', () => {
         switch(true){
         case !$length.value.trim():
             $length_error.innerHTML = "Requerido";  
-            $length_error.classList.add('is-invalid');;  
+            $length_error.classList.add('is-invalid'); 
+            break;
+        case $length.value <= 60 || $length.value >= 360:
+            $length_error.innerHTML = "La duracion debe ser entre 60 y 360min"
             break;
         default:
             $length_error.innerHTML = '';
+            $length.classList.add('is-valid');
     }})
     $genre_id.addEventListener('blur', () => {
         switch(true){
         case !$genre_id.value.trim():
             $genre_id_error.innerHTML = "Requerido"; 
-            $genre_id_error.classList.add('is-invalid');; 
+            $genre_id_error.classList.add('is-invalid');
             break;
         default:
             $genre_id_error.innerHTML = '';
+            $genre_id.classList.add('is-valid');
     }})
 
     $form.addEventListener('submit', (e) => {
         e.preventDefault()
         let errores = {}
-        if($title.value.length < 1){
+    
+        if($rating.value.length < 1){
             errores.name = "campo requerido"
+        }
+        switch(true){
+            case !$title.value.length < 0:
+                errores.name = "campo requerido"
+                break;
+            case !$genre_id.value.length < 1:
+                errores.name = "campo requerido"
+                break;
+            case !$length.value.length < 1:
+                errores.name = "campo requerido"
+                break;
+            case !$awards.value.length < 1:
+                errores.name = "campo requerido"
+                break;
+            case !$release_date.value.length < 1:
+                errores.name = "campo requerido"
+                break;
         }
 
         if(Object.keys(errores).length >= 1){
             $title_error.innerText = (errores.name) ? errores.name : '';
+            $rating_error.innerText = (errores.name) ? errores.name : '';
+            $length_error.innerText = (errores.name) ? errores.name : '';
+            $awards_error.innerText = (errores.name) ? errores.name : '';
+            $release_date_error.innerText = (errores.name) ? errores.name : '';
+            $genre_id_error.innerText = (errores.name) ? errores.name : '';
             } else {
             $form.submit();
             }
