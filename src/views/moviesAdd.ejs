@@ -18,29 +18,34 @@
         <article class="mostrarFormulario">
             <ul class="errores"></ul>
             <form class="form" action="/movies/create" method="POST">
-                <label for="title">Titulo </label>
+                <label  for="title">Titulo </label>
                     <div>
-                        <input type="text" name="title" id="title" placeholder="Título de la película">
+                        <input autofocus type="text" name="title" id="title" placeholder="Título de la película">
+                        <small id="title_error"></small>
                     </div>
 
                 <label for="rating">Calificación </label>
                     <div>
                         <input type="number" name="rating" id="rating" placeholder="Indicar valor entre 0 y 10">
+                        <small id="rating_error"></small>
                     </div>
 
                 <label for="awards">Premios </label>
                     <div>
                         <input type="number" name="awards" id="awards" placeholder="Indicar valor entre 0 y 10">
+                        <small id="awards_error"></small>
                     </div>
 
                 <label for="release_date">Fecha de creación </label>
                     <div>
                         <input type="date" name="release_date" id="release_date" >
+                        <small id="release_date_error"></small>
                     </div>
 
                 <label for="length">Duración </label>
                     <div>
                         <input type="number" name="length" id="length" placeholder="Indicar duración entre 60 y 360 minutos" >
+                        <small id="length_error"></small>
                     </div>
 
                 <label for="genreID">Género </label>
@@ -51,14 +56,16 @@
                         <option value="<%= genre.id %>"><%= genre.name %></option>
                         <% }); %>
                     </select>
+                    <small id="genre_id_error"></small>
                 </div>
                 <br>
                 <div> 
-                    <button class="botonAgregar" type="submit">Agregar</button>
+                    <button class="botonAgregar" type="submit" id="agregarPelicula">Agregar</button>
                     <a  class="botonVolver" href="/movies">Listado de Películas</a>
                 </div>
             </form>
         </article>
     </section>
+    <script src="../../js/moviesAddValidation.js"></script>
 </body>
 </html>
