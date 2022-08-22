@@ -14,8 +14,8 @@ window.addEventListener('load', () => {
     let $length_error = document.querySelector('#length_error'); 
     let $genre_id = document.querySelector('#genre_id');
     let $genre_id_error = document.querySelector('#genre_id_error');
-    let $agregarPelicula = document.querySelector('#agregarPelicula');
     let $form = document.querySelector('.form');
+    
 
     /* Estilos generales */
     $titulo.innerHTML = 'AGREGAR PELÍCULA';
@@ -32,6 +32,7 @@ window.addEventListener('load', () => {
         default:
             $title_error.innerHTML = '';
             $title.classList.add('is-valid');
+            break;
     }})
 
     $rating.addEventListener('blur', () => {
@@ -46,6 +47,7 @@ window.addEventListener('load', () => {
         default:
             $rating_error.innerHTML = '';
             $rating.classList.add('is-valid');
+            break;
     }})
     $awards.addEventListener('blur', () => {
         switch(true){
@@ -59,6 +61,7 @@ window.addEventListener('load', () => {
         default:
             $awards_error.innerHTML = '';
             $awards.classList.add('is-valid');
+            break;
     }})
     $release_date.addEventListener('blur', () => {
         switch(true){
@@ -69,6 +72,7 @@ window.addEventListener('load', () => {
         default:
             $release_date_error.innerHTML = '';
             $release_date.classList.add('is-valid');
+            break;
     }})
     $length.addEventListener('blur', () => {
         switch(true){
@@ -82,6 +86,7 @@ window.addEventListener('load', () => {
         default:
             $length_error.innerHTML = '';
             $length.classList.add('is-valid');
+            break;
     }})
     $genre_id.addEventListener('blur', () => {
         switch(true){
@@ -92,48 +97,37 @@ window.addEventListener('load', () => {
         default:
             $genre_id_error.innerHTML = '';
             $genre_id.classList.add('is-valid');
+            break;
     }})
-
+ 
     $form.addEventListener('submit', (e) => {
         e.preventDefault()
         let errores = {}
-    
-        if($rating.value.length < 1){
+        if($title.value.length < 1
+            || $rating.value.length < 1
+            || $awards.value.length < 1
+            || $release_date.value.length < 1
+            || $length.value.length < 1
+            || $genre_id.value.length < 1){
             errores.name = "campo requerido"
-        }
-        switch(true){
-            case !$title.value.length < 0:
-                errores.name = "campo requerido"
-                break;
-            case !$genre_id.value.length < 1:
-                errores.name = "campo requerido"
-                break;
-            case !$length.value.length < 1:
-                errores.name = "campo requerido"
-                break;
-            case !$awards.value.length < 1:
-                errores.name = "campo requerido"
-                break;
-            case !$release_date.value.length < 1:
-                errores.name = "campo requerido"
-                break;
         }
 
         if(Object.keys(errores).length >= 1){
             $title_error.innerText = (errores.name) ? errores.name : '';
+            $title_error.classList.add('is-invalid')
             $rating_error.innerText = (errores.name) ? errores.name : '';
+            $rating_error.classList.add('is-invalid')
             $length_error.innerText = (errores.name) ? errores.name : '';
+            $length_error.classList.add('is-invalid')
             $awards_error.innerText = (errores.name) ? errores.name : '';
-            $release_date_error.innerText = (errores.name) ? errores.name : '';
+            $awards_error.classList.add('is-invalid')
+            $release_date_error.innerText = (errores.name) ? errores.name : ''; 
+            $release_date_error.classList.add('is-invalid')
             $genre_id_error.innerText = (errores.name) ? errores.name : '';
+            $genre_id_error.classList.add('is-invalid')
             } else {
             $form.submit();
+            alert('Película agregada con éxito!!')
             }
-           
-
     })
-
-    
-
-
 })
